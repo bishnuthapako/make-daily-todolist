@@ -1,7 +1,10 @@
 import React from 'react'
-import { Box, Container, Typography, Avatar, Button, TextField, FormControlLabel, Checkbox, Grid } from '@mui/material'
+import { Box, Container, Typography, Avatar, Button, TextField, Grid } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Link } from 'react-router-dom';
+import {auth, provider} from "../../config/firebase"
+import {signInWithPopup} from "firebase/auth"
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -16,15 +19,25 @@ function Copyright(props) {
   );
 }
 
-const Login = () => {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-          email: data.get('email'),
-          password: data.get('password'),
-        });
-      };
+const Login = ({setIsAuth}) => {
+
+  // console.log(auth.currentUser.email, "email")
+  const navigate = useNavigate()
+  
+  const signInWithGoogle = async ()=> {
+      try{
+        setIsAuth(false)
+        await signInWithPopup(auth, provider).then(()=>{
+            localStorage.setItem("isAuth", true)
+          setIsAuth(true)
+          navigate("/")
+        })
+
+      }catch(error){
+
+      }
+  }
+   
 
   return (
     <Container component="main" maxWidth="xs">
@@ -42,7 +55,7 @@ const Login = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -63,10 +76,7 @@ const Login = () => {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
@@ -79,6 +89,7 @@ const Login = () => {
               type="submit"
               fullWidth
               variant="contained"
+              onClick={signInWithGoogle}
               sx={{ mt: 1, mb: 2 }}
             >
               Sign In with Google Account

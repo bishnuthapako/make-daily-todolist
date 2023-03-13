@@ -1,5 +1,5 @@
-import { Box, CssBaseline } from '@mui/material'
-import React from 'react'
+import { Box, CssBaseline, Typography } from '@mui/material'
+import React, {useState, useEffect} from 'react'
 import { createTheme, ThemeProvider,styled } from '@mui/material/styles';
 import { amber, purple } from '@mui/material/colors';
 import Header from './Header';
@@ -8,7 +8,8 @@ import Home from './page/Home';
 import Create from "./page/Create"
 import Post from "./page/Post"
 import Login from './page/Login';
-
+import {db} from "../config/firebase";
+import {getDocs, collection, deleteDoc, doc} from "firebase/firestore"
 
 const theme = createTheme({
 
@@ -29,15 +30,40 @@ const BodyBox = styled(Box)(({theme})=>({
 }));
 
 const App = () => {
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"))
+  const [todoList, setTodoList] = useState([])
+  
+  console.log(todoList, 'todo')
+
+  const todoCollectionRef = collection(db, "notepad");
+  const getTodolist = async()=> {
+      try{
+        const data = await getDocs(todoCollectionRef);
+        const getTodoData = data.docs.map((doc)=>({
+          ...doc.data(),
+          id: doc.id
+        }))
+        setTodoList(getTodoData)
+      }catch(error){
+
+      }
+  }
+
+useEffect(()=>{
+  getTodolist()
+},[])
+
   return (
     <>  
     <ThemeProvider theme={theme}>
         <BodyBox>
             <CssBaseline />
-            <Header />
+            <Header isAuth={isAuth} setIsAuth={setIsAuth}/>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        {
+          todoList.map((todo)=>(<Route path="/" element={<Home key={todo.id} todo={todo} />} />))
+        }
+        <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
         <Route path="/post/:id" element={<Post />} />
         <Route path ="/create" element={<Create />} />
       </Routes>

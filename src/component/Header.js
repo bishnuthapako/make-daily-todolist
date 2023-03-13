@@ -1,6 +1,9 @@
 import { AppBar, Box, Button, Container, styled, Toolbar } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {signOut} from "firebase/auth"
+import {auth} from "../config/firebase"
+
 
 const CustomToolbar = styled(Toolbar)({
     display: "flex",
@@ -16,7 +19,23 @@ const FlexBox = styled(Box)({
     color: "white"
 })
 
-const Header = () => {
+const Header = ({isAuth, setIsAuth}) => {
+
+    const handleLogOut = async ()=> {
+        try{
+            setIsAuth(true)
+            await signOut(auth).then(()=>{
+                localStorage.clear()
+                setIsAuth(false)
+                window.location.pathname("/login")
+            })
+       
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+
   return (
     <>
     <AppBar elevation={1} sx={{bgcolor: "primary.main"}}>
@@ -30,10 +49,15 @@ const Header = () => {
                     </Button>
                 </Box>
                 <FlexBox>
-                   
-                   <Link to="/create" style={{textDecoration: "none", textTransform: "uppercase"}}>Create TodoList</Link>
-                   <Button><Link style={{textDecoration: "none"}}>Log Out</Link></Button>
-                   <Button><Link to="/login" style={{textDecoration: "none"}}>Log In</Link></Button>
+                    {
+                        !isAuth ? 
+                         <Button><Link to="/login" style={{textDecoration: "none"}}>Log In</Link></Button>
+                         :
+                         <>
+                         <Link to="/create" style={{textDecoration: "none", textTransform: "uppercase"}}>Create TodoList</Link>
+                         <Button variant="outlined" onClick={handleLogOut} sx={{color: "white"}}>log Out</Button>
+                         </>
+                    } 
                 </FlexBox>
         </CustomToolbar>
             </Container>

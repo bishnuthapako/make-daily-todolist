@@ -5,7 +5,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
 
-const Home = () => {
+const Home = ({todo}) => {
+  console.log(todo, 'todo')
   return (
     <Container maxWidth="lg" sx={{mt: 8}}>
       <Grid container spacing={1}>
