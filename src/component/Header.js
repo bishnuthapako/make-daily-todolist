@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Container, styled, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Button, Container, styled, Toolbar } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -23,7 +23,7 @@ const Header = () => {
             <Container maxWidth="lg">
         <CustomToolbar>
                 <Box>
-                    <Button variant="text" sx={{color: "secondary.main", textTransform: "capitalize"}}>
+                    <Button variant="text" sx={{color: "secondary.main"}}>
                         <Link to="/">
                         MAKE TODO List
                         </Link>
@@ -31,10 +31,9 @@ const Header = () => {
                 </Box>
                 <FlexBox>
                    
-                   <Link to="/create">Create TodoList</Link>
-
-                   <Button><Link>Log Out</Link></Button>
-                   <Button><Link to="/login">Log In</Link></Button>
+                   <Link to="/create" style={{textDecoration: "none", textTransform: "uppercase"}}>Create TodoList</Link>
+                   <Button><Link style={{textDecoration: "none"}}>Log Out</Link></Button>
+                   <Button><Link to="/login" style={{textDecoration: "none"}}>Log In</Link></Button>
                 </FlexBox>
         </CustomToolbar>
             </Container>
