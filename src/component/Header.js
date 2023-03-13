@@ -21,14 +21,14 @@ const Header = () => {
             <Container maxWidth="lg">
         <CustomToolbar>
                 <Box>
-                    <Button sx={{color: "secondary.main"}}>
-                        Random User
+                    <Button variant="text" sx={{color: "secondary.main", textTransform: "capitalize"}}>
+                        MAKE TODO List
                     </Button>
                 </Box>
                 <FlexBox>
-                    <Typography>About me</Typography>
-                    <Typography>Contact us</Typography>
-                    <Typography>Terms & Condition</Typography>
+                    <Typography variant="body1" gutterBottom>Create Todo</Typography>
+                    <Typography variant="body1" gutterBottom>Log Out</Typography>
+                    <Typography variant="body1" gutterBottom>Log In</Typography>
                 </FlexBox>
         </CustomToolbar>
             </Container>
