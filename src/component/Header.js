@@ -14,9 +14,8 @@ const CustomToolbar = styled(Toolbar)({
 const FlexBox = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
-    width: "30%",
-    alignItems: "center",
-    color: "white"
+    width: "25%",
+    alignItems: "center"
 })
 
 const Header = ({isAuth, setIsAuth}) => {

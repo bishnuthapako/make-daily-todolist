@@ -1,10 +1,12 @@
 import { Avatar, Button, Card, CardContent, CardHeader, Container, Grid, IconButton, Typography } from '@mui/material'
 import React from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { auth } from '../../config/firebase';
+import { Link } from 'react-router-dom';
 
 
 
-const Home = ({todoList, handleDelete}) => {
+const Home = ({todoList, handleDelete, isAuth}) => {
   
   // console.log(todo, 'todo')
   // console.log(todo?.imgurl, 'img')
@@ -24,9 +26,15 @@ const Home = ({todoList, handleDelete}) => {
             }
           action={
             <IconButton aria-label="settings">
+              {
+                isAuth && todo?.author.id === auth?.currentUser?.uid && (
+                  <>
               <Button type="submit" onClick={()=>handleDelete(todo?.id)}>
                 <MoreVertIcon />
               </Button>
+                </>
+                )
+              }
             </IconButton>
           }
           title={todo?.author?.name}
@@ -34,13 +42,14 @@ const Home = ({todoList, handleDelete}) => {
         />
           <CardContent>
                 <Typography variant="h5" color="text.secondary">
+                  <Link to={`/post/view/${todo.author.id}`} style={{textDecoration: "none"}}>
                   {todo?.title}
+                  </Link>
                 </Typography>
             </CardContent>
             <CardContent sx={{mt: -2}}>
               <Typography variant="body2" color="text.secondary">
               {todo?.description}
-              console.log(todo?.author?.id, "id")
               </Typography>
             </CardContent>
         </Card>

@@ -66,11 +66,9 @@ const handleDelete = async (id)=> {
             <CssBaseline />
             <Header isAuth={isAuth} setIsAuth={setIsAuth}/>
       <Routes>
-        
-        {/* <Route path="/" element={<Home isAuth={isAuth}/> */}
         <Route path="/" element={<Home todoList={todoList} isAuth={isAuth} handleDelete={handleDelete} />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
-        <Route path="/post/:id" element={<Post />} />
+        <Route path="/post/view/:id" element={<Post />} />
         <Route path ="/create" element={<Create getTodolist={getTodolist} />} />
       </Routes>
         </BodyBox>
