@@ -52,6 +52,13 @@ useEffect(()=>{
   getTodolist()
 },[])
 
+
+const handleDelete = async (id)=> {
+  const todoDoc = doc(db, "notepad", id)
+  await deleteDoc(todoDoc)
+  getTodolist()
+}
+
   return (
     <>  
     <ThemeProvider theme={theme}>
@@ -61,7 +68,7 @@ useEffect(()=>{
       <Routes>
         
         {/* <Route path="/" element={<Home isAuth={isAuth}/> */}
-        <Route path="/" element={<Home todoList={todoList} isAuth={isAuth} />} />
+        <Route path="/" element={<Home todoList={todoList} isAuth={isAuth} handleDelete={handleDelete} />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
         <Route path="/post/:id" element={<Post />} />
         <Route path ="/create" element={<Create getTodolist={getTodolist} />} />
