@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/make-daily-todolist/static/css/main.e6c13ad2.css",
+    "main.js": "/make-daily-todolist/static/js/main.cfd42d51.js",
+    "index.html": "/make-daily-todolist/index.html",
+    "main.e6c13ad2.css.map": "/make-daily-todolist/static/css/main.e6c13ad2.css.map",
+    "main.cfd42d51.js.map": "/make-daily-todolist/static/js/main.cfd42d51.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.cfd42d51.js"
+  ]
+}
