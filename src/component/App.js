@@ -10,6 +10,7 @@ import Post from "./page/Post"
 import Login from './page/Login';
 import {db} from "../config/firebase";
 import {getDocs, collection, deleteDoc, doc} from "firebase/firestore"
+import Edit from './page/Edit';
 
 const theme = createTheme({
 
@@ -71,6 +72,7 @@ const handleDelete = async (id)=> {
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
         <Route path="/post/:id" element={isAuth ? <Post /> : <Login setIsAuth={setIsAuth} />} />
         <Route path ="/create" element={<Create getTodolist={getTodolist} />} />
+        <Route path="/edit/:id" element={<Edit />} />
       </Routes>
         </BodyBox>
     </ThemeProvider>

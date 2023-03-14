@@ -26,6 +26,7 @@ const Home = ({todoList, handleDelete, isAuth}) => {
               {
                 isAuth && todo?.author.id === auth?.currentUser?.uid && (
                   <>
+                  <Link to={`/edit/${todo.id}`} style={{textDecoration: "none", fontSize: "15px"}}>Edit</Link>
               <Button onClick={()=>handleDelete(todo?.id)}>
                 <MoreVertIcon />
               </Button>
