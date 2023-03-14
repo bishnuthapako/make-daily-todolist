@@ -34,17 +34,11 @@ const Post = () => {
                       </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  {/*  */}
             <CardHeader
           avatar={<Avatar src={getTodos?.imgurl} /> }
           title={getTodos?.author?.name}
           subheader={getTodos?.createdAt?.toDate()?.toDateString()}
         />
-
-                  {/*  */}
-                      {/* <Typography variant="body2" gutterBottom>
-                      {getTodos?.createdAt?.toDate()?.toDateString()} by {getTodos?.createdBy}
-                      </Typography> */}
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant="body1" sx={{textAlign: "justify"}}>

@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 const Home = ({todoList, handleDelete, isAuth}) => {
   
- const MAXLENGTH = 100;
 
   return (
     <Container maxWidth="lg" sx={{mt: 8}}>

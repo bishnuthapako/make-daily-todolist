@@ -50,7 +50,7 @@ const App = () => {
   }
 
 useEffect(()=>{
-  getTodolist()
+  getTodolist();
 },[])
 
 
@@ -69,7 +69,7 @@ const handleDelete = async (id)=> {
       <Routes>
         <Route path="/" element={<Home todoList={todoList} isAuth={isAuth} handleDelete={handleDelete} />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
-        <Route path="/post/:id" element={isAuth ? <Post /> : <Login />} />
+        <Route path="/post/:id" element={isAuth ? <Post /> : <Login setIsAuth={setIsAuth} />} />
         <Route path ="/create" element={<Create getTodolist={getTodolist} />} />
       </Routes>
         </BodyBox>

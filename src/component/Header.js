@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {signOut} from "firebase/auth"
 import {auth} from "../config/firebase"
-import { palette } from '@mui/system'
+
 
 
 const CustomToolbar = styled(Toolbar)({
@@ -18,13 +18,6 @@ const FlexBox = styled(Box)({
     alignItems: "center"
 })
 
-// const NavButton = styled(Button)(({theme})=>({
-//     backgroundColor: theme.palette.error.contrastText,
-//     ':hover' :{
-//         color: theme.palette.error.contrastText,
-//         backgroundColor: theme.palette.secondary.light
-//     }
-// }))
 
 const Header = ({isAuth, setIsAuth}) => {
 
