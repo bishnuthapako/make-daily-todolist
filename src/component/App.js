@@ -26,7 +26,8 @@ const BodyBox = styled(Box)(({theme})=>({
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.grey[100],
     width: "100%",
-    height: "auto"
+    height: "100%",
+    minHeight: "100vh"
 }));
 
 const App = () => {
@@ -68,7 +69,7 @@ const handleDelete = async (id)=> {
       <Routes>
         <Route path="/" element={<Home todoList={todoList} isAuth={isAuth} handleDelete={handleDelete} />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
-        <Route path="/post/view/:id" element={<Post />} />
+        <Route path="/post/:id" element={isAuth ? <Post /> : <Login />} />
         <Route path ="/create" element={<Create getTodolist={getTodolist} />} />
       </Routes>
         </BodyBox>

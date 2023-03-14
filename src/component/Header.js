@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {signOut} from "firebase/auth"
 import {auth} from "../config/firebase"
+import { palette } from '@mui/system'
 
 
 const CustomToolbar = styled(Toolbar)({
@@ -13,10 +14,17 @@ const CustomToolbar = styled(Toolbar)({
 
 const FlexBox = styled(Box)({
     display: "flex",
-    justifyContent: "space-between",
-    width: "25%",
+    gap: 6,
     alignItems: "center"
 })
+
+// const NavButton = styled(Button)(({theme})=>({
+//     backgroundColor: theme.palette.error.contrastText,
+//     ':hover' :{
+//         color: theme.palette.error.contrastText,
+//         backgroundColor: theme.palette.secondary.light
+//     }
+// }))
 
 const Header = ({isAuth, setIsAuth}) => {
 
@@ -37,13 +45,15 @@ const Header = ({isAuth, setIsAuth}) => {
 
   return (
     <>
-    <AppBar elevation={1} sx={{bgcolor: "primary.main"}}>
+    <AppBar elevation={1} sx={{bgcolor: "success.light"}}>
             <Container maxWidth="lg">
         <CustomToolbar>
                 <Box>
                     <Button variant="text" sx={{color: "secondary.main"}}>
-                        <Link to="/">
-                        MAKE TODO List
+                        <Link to="/" style={{textDecoration: "none"}}>
+                        <Button variant="contained" sx={{bgcolor: "warning.contrastText", textDecoration: "none", ":hover": {
+                            color: "success.contrastText",
+                        }}}>Todo Notes</Button>
                         </Link>
                     </Button>
                 </Box>
@@ -51,11 +61,11 @@ const Header = ({isAuth, setIsAuth}) => {
                     {
                         isAuth ? 
                         <>
-                        <Link to="/create" style={{textDecoration: "none", textTransform: "uppercase"}}>Create TodoList</Link>
-                        <Button variant="outlined" onClick={handleLogOut} sx={{color: "white"}}>log Out</Button>
+                        <Link to="/create" style={{textDecoration: "none", textTransform: "capitalize"}}><Button variant="outlined" color="error">Create Notes</Button></Link>
+                        <Button variant="contained" onClick={handleLogOut} color="success">log Out</Button>
                         </>
                          :
-                         <Button><Link to="/login" style={{textDecoration: "none"}}>Log In</Link></Button>  
+                         <Link to="/login" style={{textDecoration: "none"}}><Button variant='contained' color="success">Log In</Button></Link> 
                     } 
                 </FlexBox>
         </CustomToolbar>
