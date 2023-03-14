@@ -1,16 +1,15 @@
 import { Box, Container, TextField, Button } from '@mui/material'
 import React, {useState} from 'react';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { auth, db } from "../../config/firebase"
 import { useNavigate } from 'react-router-dom';
 
-const Create = () => {
+const Create = ({getTodolist}) => {
 
 const navigate = useNavigate();
 const [title, setTitle] = useState("")
 const [description, setDescription] = useState("")
 
-console.log(auth.currentUser.photoURL, 'curr')
 
 const  todoCollectionRef = collection(db, "notepad")
 const handleSubmit = async ()=> {
@@ -21,12 +20,14 @@ const handleSubmit = async ()=> {
       await addDoc(todoCollectionRef, {
         title,
         description,
+        createdAt: Timestamp.now().toDate(),
+        imgurl: auth.currentUser.photoURL,
         author: {
-          photoUrl: auth.currentUser.photoURL,
           name: auth.currentUser.displayName,
           id: auth.currentUser.uid
         } 
       })
+      getTodolist()
       navigate("/")
     }catch(error){
       console.log(error)

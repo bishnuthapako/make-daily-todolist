@@ -1,4 +1,4 @@
-import { Box, CssBaseline, Typography } from '@mui/material'
+import { Box, CssBaseline } from '@mui/material'
 import React, {useState, useEffect} from 'react'
 import { createTheme, ThemeProvider,styled } from '@mui/material/styles';
 import { amber, purple } from '@mui/material/colors';
@@ -26,14 +26,13 @@ const BodyBox = styled(Box)(({theme})=>({
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.grey[100],
     width: "100%",
-    height: "100vh"
+    height: "auto"
 }));
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"))
   const [todoList, setTodoList] = useState([])
   
-  console.log(todoList, 'todo')
 
   const todoCollectionRef = collection(db, "notepad");
   const getTodolist = async()=> {
@@ -60,12 +59,12 @@ useEffect(()=>{
             <CssBaseline />
             <Header isAuth={isAuth} setIsAuth={setIsAuth}/>
       <Routes>
-        {
-          todoList.map((todo)=>(<Route path="/" element={<Home key={todo.id} todo={todo} />} />))
-        }
+        
+        {/* <Route path="/" element={<Home isAuth={isAuth}/> */}
+        <Route path="/" element={<Home todoList={todoList} isAuth={isAuth} />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
         <Route path="/post/:id" element={<Post />} />
-        <Route path ="/create" element={<Create />} />
+        <Route path ="/create" element={<Create getTodolist={getTodolist} />} />
       </Routes>
         </BodyBox>
     </ThemeProvider>

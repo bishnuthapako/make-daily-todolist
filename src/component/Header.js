@@ -50,13 +50,13 @@ const Header = ({isAuth, setIsAuth}) => {
                 </Box>
                 <FlexBox>
                     {
-                        !isAuth ? 
-                         <Button><Link to="/login" style={{textDecoration: "none"}}>Log In</Link></Button>
+                        isAuth ? 
+                        <>
+                        <Link to="/create" style={{textDecoration: "none", textTransform: "uppercase"}}>Create TodoList</Link>
+                        <Button variant="outlined" onClick={handleLogOut} sx={{color: "white"}}>log Out</Button>
+                        </>
                          :
-                         <>
-                         <Link to="/create" style={{textDecoration: "none", textTransform: "uppercase"}}>Create TodoList</Link>
-                         <Button variant="outlined" onClick={handleLogOut} sx={{color: "white"}}>log Out</Button>
-                         </>
+                         <Button><Link to="/login" style={{textDecoration: "none"}}>Log In</Link></Button>  
                     } 
                 </FlexBox>
         </CustomToolbar>
